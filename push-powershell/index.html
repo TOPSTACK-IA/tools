@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Deploy - TOPSTACK</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Paleta Branco e Preto conforme a marca */
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            
+            /* Elementos de destaque */
+            --accent-black: #000000;
+            --accent-white: #ffffff;
+            
+            /* Cores de estado */
+            --danger: #ef4444;
+            --danger-bg: #fef2f2;
+            --danger-border: #fee2e2;
+            --success: #10b981;
+            
+            /* Identidade Topstack */
+            --topstack-green: #2dd4bf;
+            --topstack-green-bright: #00fa9a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            flex: 1;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            max-width: 220px;
+            height: auto;
+            margin-bottom: 30px;
+            /* Filtro opcional caso a logo original seja branca, 
+               mas a URL fornecida parece ser colorida/escura. 
+               Se precisar forçar preto: filter: brightness(0); */
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            letter-spacing: -0.05rem;
+        }
+
+        p.subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Steps */
+        .step-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        .step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            border-color: #cbd5e1;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            background-color: var(--accent-black);
+            color: var(--accent-white);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px; /* Quadrado arredondado mais moderno */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 15px;
+            font-size: 0.95rem;
+        }
+
+        .step-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .step-desc {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Terminal Code Block */
+        .code-block {
+            background-color: #1e1e1e; /* Fundo escuro padrão de terminal */
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #333;
+        }
+
+        .code-text {
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-left: 15px;
+            flex-shrink: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .copy-btn:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .copy-btn.copied {
+            background-color: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        /* Danger Zone */
+        .danger-zone {
+            margin-top: 50px;
+            border: 1px solid var(--danger-border);
+            background-color: var(--danger-bg);
+        }
+
+        .danger-zone .step-number {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .danger-zone:hover {
+            border-color: var(--danger);
+        }
+
+        .danger-badge {
+            background-color: #fee2e2;
+            color: var(--danger);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: auto;
+            border: 1px solid #fecaca;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-content p {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+
+        .footer-dev {
+            margin-top: 20px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .footer-dev a {
+            color: #ffffff;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Efeito Verde Água ao passar o mouse ou clicar */
+        .footer-dev a:hover,
+        .footer-dev a:active,
+        .footer-dev a:focus {
+            background-color: var(--topstack-green);
+            color: #000000;
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.4);
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .code-block {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            
+            .copy-btn {
+                margin-left: 0;
+                text-align: center;
+            }
+            
+            .step-header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .danger-badge {
+                margin-left: 0;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="https://pvlobuvyblzcielydbum.supabase.co/storage/v1/object/public/topstack/topstack-logo-3x1.png" alt="TOPSTACK" class="logo">
+            <h1>Guia de Deploy Git</h1>
+            <p class="subtitle">Instruções de atualização via PowerShell</p>
+        </header>
+
+        <!-- Passo 1 -->
+        <div class="step-card">
+            <div class="step-header">
+                <span class="step-number">1</span>
+                <span class="step-title">Acessar a Pasta</span>
+            </div>
+            <p class="step-desc">Navegue até o diretório onde o projeto está salvo no seu computador.</p>
+            <div class="code-block">
+                <span class="code-text">cd "C:\[CAMINHO_DA_SUA_PASTA]\[NOME_DO_PROJETO]"</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'cd \'C:\\[CAMINHO_DA_SUA_PASTA]\\[NOME_DO_PROJETO]\'')">Copiar</button>
+            </div>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="step-card">
+            <div class="step-header">
+                <span class="step-number">2</span>
+                <span class="step-title">Adicionar Arquivos (Stage)</span>
+            </div>
+            <p class="step-desc">Este comando prepara todas as suas alterações para serem salvas.</p>
+            <div class="code-block">
+                <span class="code-text">git add .</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'git add .')">Copiar</button>
+            </div>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="step-card">
+            <div class="step-header">
+                <span class="step-number">3</span>
+                <span class="step-title">Salvar Versão (Commit)</span>
+            </div>
+            <p class="step-desc">Cria um pacote fechado com as mudanças e uma mensagem de identificação.</p>
+            <div class="code-block">
+                <span class="code-text">git commit -m "Atualizacao do site"</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'git commit -m &quot;Atualizacao do site&quot;')">Copiar</button>
+            </div>
+        </div>
+
+        <!-- Passo 4 -->
+        <div class="step-card">
+            <div class="step-header">
+                <span class="step-number">4</span>
+                <span class="step-title">Enviar (Push Padrão)</span>
+            </div>
+            <p class="step-desc">Envia as atualizações para o GitHub. Use este comando no dia a dia.</p>
+            <div class="code-block">
+                <span class="code-text">git push</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'git push')">Copiar</button>
+            </div>
+        </div>
+
+        <!-- Passo 5 (Danger) -->
+        <div class="step-card danger-zone">
+            <div class="step-header">
+                <span class="step-number">5</span>
+                <span class="step-title">Envio Forçado (Force Push)</span>
+                <span class="danger-badge">Zona de Perigo</span>
+            </div>
+            <p class="step-desc" style="color: #b91c1c;"><b>Atenção:</b> Use apenas se o GitHub rejeitar o envio padrão por conflito de histórico. Este comando apaga o que está na nuvem e substitui pelo seu PC.</p>
+            <div class="code-block" style="background-color: #2b1212; border-color: #552525;">
+                <span class="code-text" style="color: #fca5a5;">git push -u origin main --force</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'git push -u origin main --force')">Copiar</button>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Todos os direitos reservados.</p>
+            <p class="footer-dev">
+                Desenvolvido por 
+                <a href="https://topstack.com.br" target="_blank" rel="noopener noreferrer">TOPSTACK</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function copyToClipboard(button, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.innerText;
+                button.innerText = "Copiado!";
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerText = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar:', err);
+                alert('Erro ao copiar. Tente selecionar e copiar manualmente.');
+            });
+        }
+    </script>
+</body>
+</html>
