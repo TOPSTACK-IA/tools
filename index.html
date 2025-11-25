@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOPSTACK | DevTools & Standards</title>
+    
+<!-- SEO Primário -->
+<meta name="description" content="Transforme seu negócio com a TOPSTACK. IA, automações e software sob medida para eliminar tarefas, otimizar marketing e trazer clareza com BI.">
+<meta name="author" content="TOPSTACK">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Fontes (Space Grotesk & Inter) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Estilos CSS (Caminho Relativo) -->
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<!-- Favicons & Icons (Caminhos Relativos ./) -->
+<link rel="icon" href="./assets/favicon.ico" sizes="any">
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="manifest" href="./assets/site.webmanifest">
+
+<!-- Open Graph / Facebook / WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.topstack.com.br/">
+<meta property="og:title" content="TOPSTACK | IA, Automações e Software Sob Medida">
+<meta property="og:description" content="A TOPSTACK conecta inovação e propósito, criando soluções de IA e software sob medida.">
+<!-- Caminho Relativo para OG Image (Preview Seguro) -->
+<meta property="og:image" content="./assets/topstack-og-image-1200x630-cf.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.topstack.com.br/">
+<meta property="twitter:title" content="TOPSTACK | IA, Automações e Software Sob Medida">
+<meta property="twitter:description" content="A TOPSTACK conecta inovação e propósito, criando soluções de IA e software sob medida.">
+<meta property="twitter:image" content="./assets/topstack-og-image-1200x630-cf.png">
+
+    <style>
+        :root {
+            /* Identidade Visual TOPSTACK - Clean / White */
+            --bg-body: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #52525b; /* Zinc 600 */
+            --border-color: #e4e4e7; /* Zinc 200 */
+            
+            /* Acentos & Botões */
+            --brand-black: #000000;
+            --brand-black-hover: #27272a;
+            
+            /* Área de Código */
+            --code-bg: #f4f4f5; /* Zinc 100 */
+            --code-text: #18181b;
+            
+            /* Destaques de Sintaxe */
+            --tag-color: #2563eb;       
+            --attr-color: #7c3aed;      
+            --string-color: #059669;    
+            --comment-color: #71717a;   
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden; /* Impede scroll horizontal na página */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            flex: 1;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--brand-black);
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* TOOL GRID */
+        .tools-grid {
+            display: grid;
+            gap: 40px;
+            width: 100%;
+        }
+
+        /* TOOL CARD */
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            width: 100%;
+            overflow: hidden; /* Garante que nada vaze do card */
+        }
+
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+            border-color: #d4d4d8;
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--brand-black);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tool-badge {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            background: #f4f4f5;
+            color: var(--brand-black);
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 1px solid #e4e4e7;
+        }
+
+        .tool-desc {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        /* CODE AREA */
+        .code-container {
+            position: relative;
+            background-color: var(--code-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        .code-content {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: var(--code-text);
+            padding: 25px;
+            
+            /* Scroll Horizontal Controlado */
+            overflow-x: auto;
+            white-space: pre;
+            width: 100%;
+            
+            max-height: 450px;
+            overflow-y: auto;
+            line-height: 1.5;
+        }
+
+        /* Scrollbar Estilizada */
+        .code-content::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .code-content::-webkit-scrollbar-thumb {
+            background-color: #d4d4d8;
+            border-radius: 4px;
+        }
+        .code-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* Syntax Highlighting */
+        .tag { color: var(--tag-color); font-weight: 500; }
+        .attr { color: var(--attr-color); }
+        .string { color: var(--string-color); }
+        .comment { color: var(--comment-color); font-style: italic; }
+
+        /* ACTIONS */
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
+            border-radius: 0 0 12px 12px;
+        }
+
+        .btn-copy {
+            background-color: var(--brand-black);
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-copy:hover {
+            background-color: var(--brand-black-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: auto;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 60px 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        footer p {
+            color: #a1a1aa;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-dev {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .footer-dev a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-dev a:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px; }
+            h1 { font-size: 2.2rem; }
+            .tool-card { padding: 25px; }
+            .tool-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .btn-copy { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="https://pvlobuvyblzcielydbum.supabase.co/storage/v1/object/public/topstack/topstack-logo-3x1.png" alt="TOPSTACK" class="logo">
+            <h1>DevTools Hub</h1>
+            <p class="subtitle">Central oficial de padrões, snippets e utilitários de desenvolvimento.</p>
+        </header>
+
+        <div class="tools-grid">
+            
+            <!-- TOOL 1: SEO MASTER HEAD -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-title">
+                        <i class="bi bi-code-square" style="font-size: 1.4rem;"></i> Master SEO Head
+                    </div>
+                    <span class="tool-badge">v2.1 • Caminhos Relativos (./)</span>
+                </div>
+                
+                <p class="tool-desc">
+                    Copie este bloco <code>&lt;head&gt;</code>. Todos os caminhos de arquivos estão configurados com <code>./</code> para garantir compatibilidade total com <b>GitHub Pages</b> e <b>Netlify</b> (evitando erros 404 em subpastas).
+                </p>
+
+                <div class="code-container">
+                    <div class="code-content" id="seo-code">
+&lt;<span class="tag">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;
+&lt;<span class="tag">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;
+&lt;<span class="tag">title</span>&gt;TOPSTACK | Inteligência Artificial, Automações e Software Sob Medida&lt;/<span class="tag">title</span>&gt;
+
+<span class="comment">&lt;!-- SEO Primário --&gt;</span>
+&lt;<span class="tag">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"Transforme seu negócio com a TOPSTACK. IA, automações e software sob medida para eliminar tarefas, otimizar marketing e trazer clareza com BI."</span>&gt;
+&lt;<span class="tag">meta</span> <span class="attr">name</span>=<span class="string">"author"</span> <span class="attr">content</span>=<span class="string">"TOPSTACK"</span>&gt;
+&lt;<span class="tag">meta</span> <span class="attr">name</span>=<span class="string">"theme-color"</span> <span class="attr">content</span>=<span class="string">"#ffffff"</span>&gt;
+
+<span class="comment">&lt;!-- Fontes (Space Grotesk & Inter) --&gt;</span>
+&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="string">"preconnect"</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com"</span>&gt;
+&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="string">"preconnect"</span> <span class="attr">href</span>=<span class="string">"https://fonts.gstatic.com"</span> <span class="attr">crossorigin</span>&gt;
+&lt;<span class="tag">link</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;
+&lt;<span class="tag">link</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;
+
+<span class="comment">&lt;!-- Estilos CSS (Caminho Relativo) --&gt;</span>
+&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./styles.css"</span>&gt;
+&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"</span>&gt;
+
+<span class="comment">&lt;!-- Favicons & Icons (Caminhos Relativos ./) --&gt;</span>
+&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">href</span>=<span class="string">"./assets/favicon.ico"</span> <span class="attr">sizes</span>=<span class="string">"any"</span>&gt;
+&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">href</span>=<span class="string">"./assets/favicon.svg"</span> <span class="attr">type</span>=<span class="string">"image/svg+xml"</span>&gt;
+&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon"</span> <span class="attr">href</span>=<span class="string">"./assets/apple-touch-icon.png"</span>&gt;
+&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="string">"manifest"</span> <span class="attr">href</span>=<span class="string">"./assets/site.webmanifest"</span>&gt;
+
+<span class="comment">&lt;!-- Open Graph / Facebook / WhatsApp --&gt;</span>
+&lt;<span class="tag">meta</span> <span class="attr">property</span>=<span class="string">"og:type"</span> <span class="attr">content</span>=<span class="string">"website"</span>&gt;
+&lt;<span class="tag">meta</span> <span class="attr">property</span>=<span class="string">"og:url"</span> <span class="attr">content</span>=<span class="string">"https://www.topstack.com.br/"</span>&gt;
+&lt;<span class="tag">meta</span> <span class="attr">property</span>=<span class="string">"og:title"</span> <span class="attr">content</span>=<span class="string">"TOPSTACK | IA, Automações e Software Sob Medida"</span>&gt;
+&lt;<span class="tag">meta</span> <span class="attr">property</span>=<span class="string">"og:description"</span> <span class="attr">content</span>=<span class="string">"A TOPSTACK conecta inovação e propósito, criando soluções de IA e software sob medida."</span>&gt;
+<span class="comment">&lt;!-- Caminho Relativo para OG Image (Preview Seguro) --&gt;</span>
+&lt;<span class="tag">meta</span> <span class="attr">property</span>=<span class="string">"og:image"</span> <span class="attr">content</span>=<span class="string">"./assets/topstack-og-image-1200x630-cf.png"</span>&gt;
+
+<span class="comment">&lt;!-- Twitter --&gt;</span>
+&lt;<span class="tag">meta</span> <span class="attr">property</span>=<span class="string">"twitter:card"</span> <span class="attr">content</span>=<span class="string">"summary_large_image"</span>&gt;
+&lt;<span class="tag">meta</span> <span class="attr">property</span>=<span class="string">"twitter:url"</span> <span class="attr">content</span>=<span class="string">"https://www.topstack.com.br/"</span>&gt;
+&lt;<span class="tag">meta</span> <span class="attr">property</span>=<span class="string">"twitter:title"</span> <span class="attr">content</span>=<span class="string">"TOPSTACK | IA, Automações e Software Sob Medida"</span>&gt;
+&lt;<span class="tag">meta</span> <span class="attr">property</span>=<span class="string">"twitter:description"</span> <span class="attr">content</span>=<span class="string">"A TOPSTACK conecta inovação e propósito, criando soluções de IA e software sob medida."</span>&gt;
+&lt;<span class="tag">meta</span> <span class="attr">property</span>=<span class="string">"twitter:image"</span> <span class="attr">content</span>=<span class="string">"./assets/topstack-og-image-1200x630-cf.png"</span>&gt;</div>
+                    <div class="actions">
+                        <button class="btn-copy" onclick="copyCode()">
+                            <i class="bi bi-clipboard-plus"></i> Copiar Código
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Todos os direitos reservados.</p>
+        <div class="footer-dev">
+            Desenvolvido por 
+            <a href="https://topstack.com.br" target="_blank" rel="noopener noreferrer">TOPSTACK</a>
+        </div>
+    </footer>
+
+    <script>
+        function copyCode() {
+            // Pega o conteúdo de texto da div
+            const codeElement = document.getElementById('seo-code');
+            const textToCopy = codeElement.innerText;
+            
+            // Cria um textarea temporário para executar o comando de cópia
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            
+            // Garante que o textarea não seja visível
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+            
+            textArea.select();
+            textArea.setSelectionRange(0, 99999); /* Para mobile */
+            
+            try {
+                // Tenta executar o comando de cópia antigo (compatível com iframe)
+                const successful = document.execCommand('copy');
+                if(successful) {
+                    showSuccessFeedback();
+                } else {
+                    console.error('Comando de cópia falhou.');
+                }
+            } catch (err) {
+                console.error('Erro ao copiar', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function showSuccessFeedback() {
+            const btn = document.querySelector('.btn-copy');
+            const originalHtml = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="bi bi-check-lg"></i> Copiado!';
+            btn.style.backgroundColor = '#16a34a'; /* Green Success */
+            btn.style.color = '#ffffff';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHtml;
+                btn.style.backgroundColor = 'var(--brand-black)';
+                btn.style.color = '#ffffff';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
